@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1460907759 source:c:\codeblocks\huffman\utils.c
+	"utils.h"
+
+1460906370 c:\codeblocks\huffman\utils.h
+
+1460908104 source:c:\codeblocks\huffman\huffman.c
+	"utils.h"
+	"huffman.h"
+
+1460908178 source:c:\codeblocks\huffman\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utils.h"
+	"huffman.h"
+
+1460907844 c:\codeblocks\huffman\huffman.h
+

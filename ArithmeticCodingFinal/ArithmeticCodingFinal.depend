@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1460841360 source:c:\codeblocks\arithmeticcodingfinal\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"utils.h"
+	"arithmeticCoding.h"
+	"encoder.h"
+
+1460840357 c:\codeblocks\arithmeticcodingfinal\utils.h
+
+1460841222 source:c:\codeblocks\arithmeticcodingfinal\utils.c
+	"utils.h"
+	"arithmeticCoding.h"
+
+1460840519 c:\codeblocks\arithmeticcodingfinal\arithmeticcoding.h
+
+1460840154 source:c:\codeblocks\arithmeticcodingfinal\encoder.c
+	<stdio.h>
+	"encoder.h"
+	"arithmeticCoding.h"
+
+1460840100 c:\codeblocks\arithmeticcodingfinal\encoder.h
+
+1460841288 source:c:\codeblocks\arithmeticcodingfinal\decoder.c
+	<stdio.h>
+	"decoder.h"
+	"arithmeticCoding.h"
+
+1460840266 c:\codeblocks\arithmeticcodingfinal\decoder.h
+

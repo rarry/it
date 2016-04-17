@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1460810116 source:c:\codeblocks\arithmeticcoding\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1460801188 source:c:\codeblocks\arithmeticcoding\finateprecision.c
+	<stdio.h>
+	<stdlib.h>
+
