@@ -84,6 +84,22 @@ int *  findBinaryInterval(int x[], int xLength, double c[], double d[])
         }
     }
 
+    s = s+1;
+    if(a <= 0.25){
+        binaryInterval[index++] = 0;
+        int i;
+        for(i=0;i<s;i++){
+           binaryInterval[index++] = 1;
+        }
+    }else{
+        binaryInterval[index++] = 1;
+        int i;
+        for(i=0;i<s;i++){
+           binaryInterval[index++] = 0;
+        }
+    }
+    binaryInterval[index++] = -1;
+
     return binaryInterval;
 }
 

@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "huffman.h"
 
+
+
 int main()
 {
     printf("Hello world!\n");
@@ -17,7 +19,8 @@ int main()
 
     Node *nodes[LETTERS_COUNT];
     int i;
-    for(i=0; i<LETTERS_COUNT; i++){
+    for(i=0; i<LETTERS_COUNT; i++)
+    {
         nodes[i] = malloc(sizeof(Node));
         nodes[i]->value = lettersFrequencies[i];
         nodes[i]->letterIndex = i;
@@ -33,5 +36,16 @@ int main()
 
     printf("codeTable: ");
     printTabInt(codeTable, LETTERS_COUNT);
+
+    char * inFp = "C:\\codeblocks\\Huffman\\huffman\\from.txt";
+    char * outFp = "C:\\codeblocks\\Huffman\\huffman\\to.txt";
+    compressFile2(inFp, outFp, codeTable);
+
+    decompressFile(outFp, tree);
+
+    //FILE * output = fopen("C:\\codeblocks\\Huffman\\huffman\\to.txt","w");
+    //compressFile(input, output, codeTable);
+
+
     return 0;
 }

@@ -28,8 +28,12 @@ int ** encode(Node *tree, char * text);
 
 int ** decode(Node *tree, char * text);
 
+void compressFile2(char *inputFileName, char * outputFileName, int codeTable[]);
+
 void fillTable(int codeTable[], Node *tree, int code);
 
 void printLetterIndices(Node *nodes[]);
+
+void compressFile(FILE *input, FILE *output, int codeTable[]);
 
 #endif // HUFFMAN_H_INCLUDED

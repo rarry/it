@@ -4,15 +4,18 @@
 
 1460906370 c:\codeblocks\huffman\utils.h
 
-1460908104 source:c:\codeblocks\huffman\huffman.c
+1463952892 source:c:\codeblocks\huffman\huffman.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
 	"utils.h"
 	"huffman.h"
 
-1460908178 source:c:\codeblocks\huffman\main.c
+1463869017 source:c:\codeblocks\huffman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 	"huffman.h"
 
-1460907844 c:\codeblocks\huffman\huffman.h
+1463863721 c:\codeblocks\huffman\huffman.h
 
