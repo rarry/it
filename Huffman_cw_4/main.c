@@ -37,15 +37,12 @@ int main()
     printf("codeTable: ");
     printTabInt(codeTable, LETTERS_COUNT);
 
-    char * inFp = "C:\\workspace\\it\\Huffman\\huffman\\from.txt";
-    char * outFp = "C:\\workspace\\it\\Huffman\\huffman\\to.txt";
-    compressFile2(inFp, outFp, codeTable);
-
-    //decompressFile(outFp, tree);
-
-    //FILE * output = fopen("C:\\codeblocks\\Huffman\\huffman\\to.txt","w");
-    //compressFile(input, output, codeTable);
-
+    char * inFp = "C:\\abc.txt";
+    char * outFp = "C:\\abc_compressed.txt";
+    
+    compressFile(inFp, outFp, codeTable);
+    decompressFile(outFp, tree);
 
     return 0;
 }
+
