@@ -19,23 +19,23 @@
 
 1463863721 c:\codeblocks\huffman\huffman.h
 
-1463986651 source:c:\workspace\it\huffman\huffman.c
+1464011577 source:c:\workspace\it\huffman\huffman.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"utils.h"
 	"huffman.h"
 
-1463986651 c:\workspace\it\huffman\utils.h
+1464011303 c:\workspace\it\huffman\utils.h
 
 1463986651 c:\workspace\it\huffman\huffman.h
 
-1463986651 source:c:\workspace\it\huffman\main.c
+1464011464 source:c:\workspace\it\huffman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 	"huffman.h"
 
-1463986651 source:c:\workspace\it\huffman\utils.c
+1464011886 source:c:\workspace\it\huffman\utils.c
 	"utils.h"
 

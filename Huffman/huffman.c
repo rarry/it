@@ -140,29 +140,32 @@ void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
 
 
         int code = codeTable[c-97];
+        int orgCode = code;
         int length = len(code);
-        printf("%d\t\t%d\n", code, length);
+        //printf("%d\t\t%d\n", code, length);
 
         x = 0;
         while(length >0)
         {
-            printf("length %d\n",length);
+            //printf("length %d\n",length);
             length--;
 
             bit = code % 10 - 1;
             code /= 10;
-            printf("bit %d\n",bit);
+            //printf("bit %d\n",bit);
             x = x | bit;
             bitsLeft--;
             if(bitsLeft == 0)
             {
+                printf("character %c coded as %d saved as ", c, orgCode);
+                printbits(x);
                 fputc(x, output);
                 bitsLeft = 8;
                 x=0;
             }
 
             x = x << 1;
-            printf("x %d\n",x);
+            //printf("x %d\n",x);
         }
     }
     while(1);

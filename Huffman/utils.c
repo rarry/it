@@ -16,5 +16,19 @@ void printTabChar(char *tab, int length){
     printf("\n");
 }
 
+void printbits(int i) {
+
+  char str[16];
+  getBin(i, str);
+  printf("%s\n", str);
+}
+
+void getBin(int num, char *str)
+{
+  *(str+5) = '\0';
+  int mask = 0x10 << 1;
+  while(mask >>= 1)
+    *str++ = !!(mask & num) + '0';
+}
 
 
