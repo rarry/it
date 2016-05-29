@@ -3,6 +3,8 @@
 #include <math.h>
 #include "utils.h"
 #include "huffman.h"
+#include "crc.h"
+
 
 #define len(x) ((int)log10(x)+1)
 
@@ -48,8 +50,8 @@ Node * buildHuffmanTree(Node *nodes[])
     {
         int indexOfSmallest = findSmallest(nodes, -1);
         int indexOfSecondSmallest = findSmallest(nodes, indexOfSmallest);
-        printf("smallest: %d\n", indexOfSmallest);
-        printf("second smallest: %d\n", indexOfSecondSmallest);
+        //printf("smallest: %d\n", indexOfSmallest);
+        //printf("second smallest: %d\n", indexOfSecondSmallest);
 
         Node *smallest = nodes[indexOfSmallest];
         Node *secondSmallest = nodes[indexOfSecondSmallest];
@@ -63,7 +65,7 @@ Node * buildHuffmanTree(Node *nodes[])
 
         nodes[indexOfSmallest] = tree;
         secondSmallest->value = -1;
-        printNodeValues(nodes);
+        //printNodeValues(nodes);
     }
 
     Node * tree;
@@ -108,26 +110,9 @@ void printLetterIndices(Node *nodes[])
     printf("\n");
 }
 
+void compress(FILE *input, FILE *output, int codeTable[]){
 
-
-void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
-{
-
-    FILE * input;
-    FILE * output;
-
-    if((input = fopen(inputFileName, "rb")) == NULL)
-    {
-        perror("Nie mozna otworzyc pliku");
-        exit(EXIT_FAILURE);
-    }
-
-    if((output = fopen(outputFileName, "wb")) == NULL)
-    {
-        perror("Nie mozna otworzyc pliku");
-        exit(EXIT_FAILURE);
-    }
-    char bit, x = 0,code;
+    char bit, x = 0;
     int bitsLeft = 8;
     int c;
     do
@@ -138,13 +123,12 @@ void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
             break ;
         }
 
-
         int code = codeTable[c-97];
-        int orgCode = code;
+        //int orgCode = code;
         int length = len(code);
         //printf("%d\t\t%d\n", code, length);
 
-        x = 0;
+        //x = 0;
         while(length >0)
         {
             //printf("length %d\n",length);
@@ -157,8 +141,8 @@ void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
             bitsLeft--;
             if(bitsLeft == 0)
             {
-                printf("character %c coded as %d saved as ", c, orgCode);
-                printbits(x);
+                //printf("character %c coded as %d saved as %d (dec), bin= ", c, orgCode,x);
+                //printbits(x);
                 fputc(x, output);
                 bitsLeft = 8;
                 x=0;
@@ -175,7 +159,27 @@ void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
         x = x << (bitsLeft-1);
         fputc(x, output);
     }
+}
 
+void compressFile(char *inputFileName, char * outputFileName, int codeTable[])
+{
+
+    FILE * input;
+    FILE * output;
+
+    if((input = fopen(inputFileName, "rb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+    if((output = fopen(outputFileName, "wb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+    compress(input, output, codeTable);
 
     if(fclose(input) != NULL)
     {
@@ -192,9 +196,10 @@ void compressFile2(char *inputFileName, char * outputFileName, int codeTable[])
 
 
 
-void decompressFile(char *inputFileName, Node *root)
+void decompressFile(char *inputFileName, char * outputFileName, Node *root)
 {
     FILE * input;
+    FILE * output;
 
     if((input = fopen(inputFileName, "rb")) == NULL)
     {
@@ -202,8 +207,14 @@ void decompressFile(char *inputFileName, Node *root)
         exit(EXIT_FAILURE);
     }
 
+    if((output = fopen(outputFileName, "wb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
     int c;
-    int x = 0;
+    //int x = 0;
     int mask = 1 << 7;
     Node * node = root;
 
@@ -220,8 +231,10 @@ void decompressFile(char *inputFileName, Node *root)
                 node = node->left;
                 if(node->letterIndex < 27)
                 {
-                    printf("found %d\n", node->letterIndex);
-                    printf("%c\n", node->letterIndex+97);
+                    //printf("found %d\n", node->letterIndex);
+                    int idx = node->letterIndex+97;
+                    printf("%c", idx);
+                    fputc(idx, output);
                     node = root;
                 }
             }
@@ -230,8 +243,10 @@ void decompressFile(char *inputFileName, Node *root)
                 node = node->right;
                 if(node->letterIndex < 27)
                 {
-                    printf("found %d\n", node->letterIndex);
-                    printf("%c\n", node->letterIndex+97);
+                    //printf("found %d\n", node->letterIndex);
+                    int idx = node->letterIndex+97;
+                    printf("%c", idx);
+                    fputc(idx, output);
                     node = root;
                 }
             }
@@ -243,58 +258,26 @@ void decompressFile(char *inputFileName, Node *root)
         perror("fclose");
         exit(EXIT_FAILURE);
     }
+
+    if(fclose(output) != NULL)
+    {
+        perror("fclose");
+        exit(EXIT_FAILURE);
+    }
 }
 
+void invertCodeTable(int codeTable[],int codeTable2[]){
+    int i, n, copy;
 
-/*function to compress the input*/
-void compressFile(FILE *input, FILE *output, int codeTable[])
-{
-    char bit, c, x = 0;
-    int n,length,bitsLeft = 8;
-    int originalBits = 0, compressedBits = 0;
-
-    while ((c=fgetc(input))!=10)
-    {
-        originalBits++;
-        if (c==32)
-        {
-            length = len(codeTable[26]);
-            n = codeTable[26];
-        }
-        else
-        {
-            length=len(codeTable[c-97]);
-            n = codeTable[c-97];
-        }
-
-        while (length>0)
-        {
-            compressedBits++;
-            bit = n % 10 - 1;
+    for (i=0;i<27;i++){
+        n = codeTable[i];
+        copy = 0;
+        while (n>0){
+            copy = copy * 10 + n %10;
             n /= 10;
-            x = x | bit;
-            bitsLeft--;
-            length--;
-            if (bitsLeft==0)
-            {
-                fputc(x,output);
-                x = 0;
-                bitsLeft = 8;
-            }
-            x = x << 1;
         }
+        codeTable2[i]=copy;
     }
-
-    if (bitsLeft!=8)
-    {
-        x = x << (bitsLeft-1);
-        fputc(x,output);
-    }
-
-    /*print details of compression on the screen*/
-    fprintf(stderr,"Original bits = %dn",originalBits*8);
-    fprintf(stderr,"Compressed bits = %dn",compressedBits);
-    fprintf(stderr,"Saved %.2f%% of memoryn",((float)compressedBits/(originalBits*8))*100);
 
     return;
 }
