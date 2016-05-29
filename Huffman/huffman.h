@@ -1,7 +1,7 @@
 #ifndef HUFFMAN_H_INCLUDED
 #define HUFFMAN_H_INCLUDED
 
-#define LETTERS_COUNT   27
+#define LETTERS_COUNT   255
 
 struct node{
     int value;
@@ -37,5 +37,7 @@ void compressFile(char *inputFileName, char * outputFileName, int codeTable[]);
 void decompressFile(char *inputFileName, char * outputFileName, Node *root);
 
 void invertCodeTable(int codeTable[],int codeTable2[]);
+
+void calculateFreq(char *from, int freq[]);
 
 #endif // HUFFMAN_H_INCLUDED

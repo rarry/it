@@ -12,6 +12,16 @@ void printCodeTable(char letters[], int *codeTable, int length)
     printf("\n");
 }
 
+void printCodeTableForIdx(int *codeTable, int length)
+{
+    int i;
+    for(i=0; i<length; i++)
+    {
+        printf("%c\t%d\n", i, codeTable[i]);
+    }
+    printf("\n");
+}
+
 void printTabInt(int *tab, int length)
 {
     int i;
@@ -56,7 +66,7 @@ void printPolynomial(unsigned char * restPolynomial, int size)
     }
 }
 
-void appendFileToFile(FILE *from, FILE *to)
+void appendFileToFile(char *from, char *to)
 {
     FILE * input;
     FILE * output;
@@ -97,12 +107,27 @@ void appendFileToFile(FILE *from, FILE *to)
     }
 }
 
-void calculateFreq(FILE *from, int freq[]){
+void resetIntTable(int table[], int length){
 
+    int i;
+    for(i=0; i<length; i++)
+    {
+        table[i] = 0;
+    }
+}
+
+void copyFile(char *from, char *to)
+{
     FILE * input;
     FILE * output;
 
     if((input = fopen(from, "rb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+    if((output = fopen(to, "wb")) == NULL)
     {
         perror("Nie mozna otworzyc pliku");
         exit(EXIT_FAILURE);
@@ -116,8 +141,7 @@ void calculateFreq(FILE *from, int freq[]){
         {
             break ;
         }
-        freq[c]++;
-
+        fputc(c, output);
     }while(1);
 
     if(fclose(input) != NULL)
@@ -126,6 +150,32 @@ void calculateFreq(FILE *from, int freq[]){
         exit(EXIT_FAILURE);
     }
 
+    if(fclose(output) != NULL)
+    {
+        perror("fclose");
+        exit(EXIT_FAILURE);
+    }
+}
 
+void appendZeroes(char *fileName, int zeroesCount){
+
+    FILE * fp;
+
+    if((fp = fopen(fileName, "a")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+    int i;
+    for(i=0; i<zeroesCount; i++){
+        fputc(0, fp);
+    }
+
+    if(fclose(fp) != NULL)
+    {
+        perror("fclose");
+        exit(EXIT_FAILURE);
+    }
 }
 

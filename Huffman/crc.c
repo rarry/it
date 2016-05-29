@@ -103,21 +103,24 @@ unsigned char * calculateCrc(char *fileName)
     genPolynomial[0]=0x00;
     genPolynomial[1]=0x00;
     genPolynomial[2]=0x00;
-    genPolynomial[3]=0x0b;
+    genPolynomial[3]=0x0b; //1011
 
     int bytesCount = dzielenie(fileName, restPolynomial, genPolynomial);
     printf("Signed %d bytes\n", bytesCount);
     return restPolynomial;
 }
 
-void printCrcToFile(FILE *fp, unsigned char * crc){
+void printCrcToFile(FILE *fp, unsigned char * crc)
+{
     int i;
-    for(i=0; i<SIZECRC; i++){
+    for(i=0; i<SIZECRC; i++)
+    {
         fputc(crc[i], fp);
     }
 }
 
-void createCrcFile(char * fileName, int crcSizeInBytes, unsigned char crc[]){
+void createCrcFile(char * fileName, int crcSizeInBytes, unsigned char crc[])
+{
 
     FILE * fp;
 
@@ -129,7 +132,8 @@ void createCrcFile(char * fileName, int crcSizeInBytes, unsigned char crc[]){
 
     int c;
     int i;
-    for(i=0;i<SIZECRC;i++){
+    for(i=0; i<SIZECRC; i++)
+    {
         c = crc[i];
         fputc(c, fp);
     }
@@ -139,3 +143,54 @@ void createCrcFile(char * fileName, int crcSizeInBytes, unsigned char crc[]){
         exit(EXIT_FAILURE);
     }
 }
+
+void appendCrcToFile(char * inputWithZeroes, char * outputWithCrc, int crcSizeInBytes, unsigned char crc[])
+{
+
+    FILE * input;
+    FILE * output;
+
+    if((input = fopen(inputWithZeroes, "rb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+    if((output = fopen(outputWithCrc, "wb")) == NULL)
+    {
+        perror("Nie mozna otworzyc pliku");
+        exit(EXIT_FAILURE);
+    }
+
+
+    fseek(input, 0L, SEEK_END);
+    int fileSize = ftell(input);
+    rewind(input);
+
+    int c;
+    int i;
+
+    for(i=0; i<fileSize-SIZECRC; i++)
+    {
+        c = fgetc(input);
+        fputc(c, output);
+    }
+
+    for(i=0; i<SIZECRC; i++)
+    {
+        c = crc[i];
+        fputc(c, output);
+    }
+    if(fclose(input) != NULL)
+    {
+        perror("fclose");
+        exit(EXIT_FAILURE);
+    }
+
+    if(fclose(output) != NULL)
+    {
+        perror("fclose");
+        exit(EXIT_FAILURE);
+    }
+}
+

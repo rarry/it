@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1464532779 source:c:\codeblocks\huffman\utils.c
+1464556741 source:c:\codeblocks\huffman\utils.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 
-1464534404 c:\codeblocks\huffman\utils.h
+1464557118 c:\codeblocks\huffman\utils.h
 
-1464533785 source:c:\codeblocks\huffman\huffman.c
+1464558077 source:c:\codeblocks\huffman\huffman.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -14,14 +14,14 @@
 	"huffman.h"
 	"crc.h"
 
-1464534115 source:c:\codeblocks\huffman\main.c
+1464557663 source:c:\codeblocks\huffman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 	"huffman.h"
 	"crc.h"
 
-1464533814 c:\codeblocks\huffman\huffman.h
+1464536331 c:\codeblocks\huffman\huffman.h
 
 1464011577 source:c:\workspace\it\huffman\huffman.c
 	<stdio.h>
@@ -43,10 +43,10 @@
 1464011886 source:c:\workspace\it\huffman\utils.c
 	"utils.h"
 
-1464532980 source:c:\codeblocks\huffman\crc.c
+1464557959 source:c:\codeblocks\huffman\crc.c
 	<stdio.h>
 	<stdlib.h>
 	"crc.h"
 
-1464532742 c:\codeblocks\huffman\crc.h
+1464557941 c:\codeblocks\huffman\crc.h
 

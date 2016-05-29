@@ -11,4 +11,5 @@ void printCrcToFile(FILE *fp, unsigned char * crc);
 
 void createCrcFile(char * fileName, int crcSizeInBytes, unsigned char crc[]);
 
+void appendCrcToFile(char * inputWithZeroes, char * outputWithCrc, int crcSizeInBytes, unsigned char crc[]);
 #endif // CRC_H_INCLUDED
