@@ -1,41 +1,63 @@
 # depslib dependency file v1.0
-1460907759 source:c:\codeblocks\huffman\utils.c
+1464556741 source:c:\codeblocks\huffman\utils.c
+	<stdio.h>
+	<stdlib.h>
 	"utils.h"
 
-1460906370 c:\codeblocks\huffman\utils.h
+1464557118 c:\codeblocks\huffman\utils.h
 
-1463952892 source:c:\codeblocks\huffman\huffman.c
+1464558077 source:c:\codeblocks\huffman\huffman.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"utils.h"
 	"huffman.h"
+	"crc.h"
 
-1463869017 source:c:\codeblocks\huffman\main.c
+1464557663 source:c:\codeblocks\huffman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 	"huffman.h"
+	"crc.h"
 
-1463863721 c:\codeblocks\huffman\huffman.h
+1464536331 c:\codeblocks\huffman\huffman.h
 
-1464011577 source:c:\workspace\it\huffman\huffman.c
+1464614793 source:c:\workspace\it\huffman\huffman.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"utils.h"
 	"huffman.h"
+	"crc.h"
 
-1464011303 c:\workspace\it\huffman\utils.h
+1464614433 c:\workspace\it\huffman\utils.h
 
-1463986651 c:\workspace\it\huffman\huffman.h
+1464614433 c:\workspace\it\huffman\huffman.h
 
-1464011464 source:c:\workspace\it\huffman\main.c
+1464615669 source:c:\workspace\it\huffman\main.c
 	<stdio.h>
 	<stdlib.h>
 	"utils.h"
 	"huffman.h"
+	"crc.h"
 
-1464011886 source:c:\workspace\it\huffman\utils.c
+1464615438 source:c:\workspace\it\huffman\utils.c
+	<stdio.h>
+	<stdlib.h>
 	"utils.h"
+
+1464557959 source:c:\codeblocks\huffman\crc.c
+	<stdio.h>
+	<stdlib.h>
+	"crc.h"
+
+1464557941 c:\codeblocks\huffman\crc.h
+
+1464615604 c:\workspace\it\huffman\crc.h
+
+1464615698 source:c:\workspace\it\huffman\crc.c
+	<stdio.h>
+	<stdlib.h>
+	"crc.h"
 
